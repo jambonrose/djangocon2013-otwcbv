@@ -1,0 +1,25 @@
+{% extends "site/generic_base.html" %}
+
+{% block content %}
+<div id="accounts">
+<center>Accounts</center>
+<hr>
+{% for account in account_list %}
+<div id="account">
+<table cellpadding="3">
+    <tr>
+        <td colspan='2'><a href='{{ account.get_absolute_url }}'>{{ account.name }}</a></td>
+        <td>$ {{ account.balance }}</td>
+    </tr>
+    <tr>
+        <td colspan='2'><a href="{% url 'bank_trans_create' %}">Transfer</a></td>
+        <td><a href="{{ account.get_absolute_url }}">Details</a></td>
+    </tr>
+</table>
+</div>
+<hr>
+{% endfor %}
+<a href="{% url 'bank_account_create' %}">Create new Account</a>
+</div><!-- End account Div -->
+<div id="space"></div>
+{% endblock %}

@@ -1,0 +1,62 @@
+#header {
+    background-color: #ffffff;
+    width: 100%;
+    text-align: center;
+	font-weight: bold;
+	font-size: 1.25em;
+	margin: 1em;
+}
+
+#menu {
+    background-color: #eeeeee;
+    width: 90%;
+    margin: auto auto 1em;
+    text-align: center;
+    padding: 1%;
+}
+
+#menu ul{
+    margin: auto;
+}
+
+#menu li{
+    display: inline;
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+}
+
+#container{
+    width: 90%;
+    height: 98%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#accounts{
+    background: #ffffff;
+    float: left;
+    width: 30%;
+    max-height: 70%;
+    overflow: auto;
+}
+
+#account{
+    background: #bbbbbb;
+}
+
+#transactions{
+    background: #ffffff;
+    float: right;
+    width: 60%;
+    margin-right: 0px;
+    max-height: 70%;
+    overflow: auto;
+}
+
+#space{
+    width: 10%;
+}
+
+table {
+    width: 100%;
+}

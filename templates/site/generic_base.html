@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>{% block title %}Banker{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+</head>
+<body>
+
+<div id="header"><a href="http://afrg.co/otwcbv/">OTWCBV</a>: Banking Example</div>
+
+<div id="menu">
+<ul>
+    <li><a href="{% url 'bank_account_list' %}">Bank</a></li>
+    <li><a href="{% url 'bank_account_create' %}">Create New Account</a></li>
+    <li><a href="https://github.com/jambonrose/djangocon2013-otwcbv">GitHub Repo</a></li>
+    <li>Logout</li>
+</ul>
+</div>
+
+<div id="container">
+{% block content %}
+<h1>Default Content</h1>
+<p>Please override Content Block to supply content to page.</p>
+{% endblock %}
+</div> <!-- End of container div-->
+
+</body>
+</html>
