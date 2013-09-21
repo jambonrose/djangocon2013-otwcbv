@@ -16,28 +16,31 @@ class AccountDetail(View):
         acct = get_object_or_404(Account, slug=slug)
         return render(request, 'bank/account_detail.html', {'account': acct})
 
-class AccountCreate(View):
+class FormMixin(object):
+    form = None
+    template = ''
+    redirect = ''
+
     def get(self, request):
-        form = AccountForm()
-        return render(request, 'bank/account_form.html', {'form': form})
+        form = self.form()
+        return render(request, self.template, {'form': form})
 
     def post(self, request):
-        form = AccountForm(request.POST)
+        form = self.form(request.POST)
         if form.is_valid():
-            new_acct = form.save()
-            return redirect(new_acct)
+            new_obj = form.save()
+            if self.redirect:
+                return redirect(self.redirect)
+            else:
+                return redirect(new_obj)
         else:
-            return render(request, 'bank/account_form.html', {'form': form})
+            return render(request, self.template, {'form': form})
 
-class TransactionCreate(View):
-    def get(self, request):
-        form = TransactionForm()
-        return render(request, 'bank/account_form.html', {'form': form})
+class AccountCreate(FormMixin, View):
+    form = AccountForm
+    template = 'bank/account_form.html'
 
-    def post(self, request):
-        form = TransactionForm(request.POST)
-        if form.is_valid():
-            new_acct = form.save()
-            return redirect('bank_account_list')
-        else:
-            return render(request, 'bank/account_form.html', {'form': form})
+class TransactionCreate(FormMixin, View):
+    form = TransactionForm
+    template = 'bank/account_form.html'
+    redirect = 'bank_account_list'
