@@ -1,20 +1,20 @@
 # bank/urls.py
 from django.conf.urls import patterns, url
 from .models import Account
-from .views import (account_list, account_detail,
-                    account_create, transaction_create)
+from .views import (AccountList, AccountDetail,
+                   AccountCreate, TransactionCreate)
 
 urlpatterns = patterns('',
     url(r'^account/$',
-        account_list,
+        AccountList.as_view(),
         name='bank_account_list'),
     url(r'^account/create/$',
-        account_create,
+        AccountCreate.as_view(),
         name='bank_account_create'),
     url(r'^account/(?P<slug>[\w\-]+)/$',
-        account_detail,
+        AccountDetail.as_view(),
         name='bank_account_detail'),
     url(r'^transaction/$',
-        transaction_create,
+        TransactionCreate.as_view(),
         name='bank_trans_create'),
 )
