@@ -1,0 +1,50 @@
+[
+{
+  "pk": 1, 
+  "model": "bank.account", 
+  "fields": {
+    "balance": 200, 
+    "name": "Basic", 
+    "slug": "basic"
+  }
+},
+{
+  "pk": 2, 
+  "model": "bank.account", 
+  "fields": {
+    "balance": 4000, 
+    "name": "Savings", 
+    "slug": "savings"
+  }
+},
+{
+  "pk": 1, 
+  "model": "bank.transaction", 
+  "fields": {
+    "date": "2013-09-05T19:45:11.477Z", 
+    "from_account": 2, 
+    "amount": 20, 
+    "to_account": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "bank.transaction", 
+  "fields": {
+    "date": "2013-09-05T19:45:16.140Z", 
+    "from_account": 1, 
+    "amount": 2, 
+    "to_account": 2
+  }
+},
+{
+  "pk": 3, 
+  "model": "bank.transaction", 
+  "fields": {
+    "date": "2013-09-05T19:45:20.380Z", 
+    "from_account": 2, 
+    "amount": 40, 
+    "to_account": 1
+  }
+}
+]
