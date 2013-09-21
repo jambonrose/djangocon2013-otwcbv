@@ -1,5 +1,11 @@
 # Django settings for otwcbv project.
 
+from os.path import dirname, join, realpath
+SITE_ROOT = dirname(dirname(realpath(__file__)))
+DB_NAME = 'otwcbv.db'
+SITE_STATIC_DIR = 'site_static'
+SITE_TEMPLATES_DIR = 'templates'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,13 +17,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(SITE_ROOT, DB_NAME),
     }
 }
 
@@ -69,9 +70,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    join(SITE_ROOT, SITE_STATIC_DIR),
 )
 
 # List of finder classes that know how to find static files in
@@ -108,9 +107,7 @@ ROOT_URLCONF = 'otwcbv.urls'
 WSGI_APPLICATION = 'otwcbv.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    join(SITE_ROOT, SITE_TEMPLATES_DIR),
 )
 
 INSTALLED_APPS = (
@@ -124,6 +121,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'bank',
 )
 
 # A sample logging configuration. The only tangible logging
