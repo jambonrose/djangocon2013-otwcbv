@@ -21,20 +21,37 @@ class FormMixin(object):
     template = ''
     redirect = ''
 
+    def get_template(self):
+        if self.template == '':
+            raise ImproperlyConfigured(
+                '"template" variable  not defined in %s'
+                % self.__class__.__name__)
+        return self.template 
+
+    def get_redirect_url(self,obj):
+        if self.redirect:
+            url = self.redirect
+        else:
+            try:
+                url = obj.get_absolute_url()
+            except AttributeError:
+                raise ImproperlyConfigured(
+                    '"redirect" variable must be defined '
+                    'in %s when redirecting %s objects.'
+                    % (self.__class__.__name__, obj.__class__.__name__))
+        return url
+
     def get(self, request):
         form = self.form()
-        return render(request, self.template, {'form': form})
+        return render(request, self.get_template(), {'form': form})
 
     def post(self, request):
         form = self.form(request.POST)
         if form.is_valid():
             new_obj = form.save()
-            if self.redirect:
-                return redirect(self.redirect)
-            else:
-                return redirect(new_obj)
+            return redirect(self.get_redirect_url(new_obj))
         else:
-            return render(request, self.template, {'form': form})
+            return render(request, self.get_template(), {'form': form})
 
 class AccountCreate(FormMixin, View):
     form = AccountForm
