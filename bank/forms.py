@@ -1,7 +1,8 @@
 # bank/forms.py
 from django.forms import ModelForm
+from django.forms.widgets import HiddenInput
 from django.utils.text import slugify
-from .models import Account
+from .models import Account, Transaction
 
 class AccountForm(ModelForm):
     class Meta:
@@ -15,3 +16,17 @@ class AccountForm(ModelForm):
             instance.save()
             self.save_m2m()
         return instance
+
+class TransferFormFrom(ModelForm):
+    class Meta:
+        model = Transaction
+        widgets = {
+            'from_account': HiddenInput(),
+        }
+
+class TransferFormTo(ModelForm):
+    class Meta:
+        model = Transaction
+        widgets = {
+            'to_account': HiddenInput(),
+        }

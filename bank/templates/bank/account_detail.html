@@ -7,6 +7,7 @@
 <center>{{ account.name|capfirst }} Account</center>
 <p>Bal: ${{ account.balance }}</p>
 <hr>
+<p><a href="{{ account.get_trans_from_url }}">Send Funds From</a> | <a href="{{ account.get_trans_to_url }}">Send Funds To</a></p>
 <p><a href="{% url 'bank_account_list' %}">Back to Account List</a></p>
 </div><!-- End account Div -->
 

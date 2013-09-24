@@ -15,6 +15,14 @@ class Account(models.Model):
         return reverse('bank_account_detail',
                        kwargs={'slug': self.slug})
 
+    def get_trans_from_url(self):
+        return reverse('bank_trans_from',
+                       kwargs={'slug':self.slug})
+
+    def get_trans_to_url(self):
+        return reverse('bank_trans_to',
+                       kwargs={'slug':self.slug})
+
     def related_transactions(self):
         return Transaction._default_manager.filter(Q(from_account=self) |
                                                    Q(to_account=self))\
