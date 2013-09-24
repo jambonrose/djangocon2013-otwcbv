@@ -3,10 +3,11 @@ from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Account, Transaction
+from .views import AccountList
 
 urlpatterns = patterns('',
     url(r'^account/$',
-        ListView.as_view(model=Account),
+        AccountList.as_view(),
         name='bank_account_list'),
     url(r'^account/create/$',
         CreateView.as_view(model=Account),
