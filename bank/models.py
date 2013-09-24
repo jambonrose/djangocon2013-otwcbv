@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 
 class Account(models.Model):
     name = models.CharField('Account Name', max_length=127)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True)
     balance = models.IntegerField('Balance')
 
     def __unicode__(self):

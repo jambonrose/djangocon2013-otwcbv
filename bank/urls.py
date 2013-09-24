@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Account, Transaction
+from .forms import AccountForm
 from .views import AccountList
 
 urlpatterns = patterns('',
@@ -10,7 +11,8 @@ urlpatterns = patterns('',
         AccountList.as_view(),
         name='bank_account_list'),
     url(r'^account/create/$',
-        CreateView.as_view(model=Account),
+        CreateView.as_view(model=Account,
+                           form_class=AccountForm),
         name='bank_account_create'),
     url(r'^account/(?P<slug>[\w\-]+)/$',
         DetailView.as_view(model=Account),
