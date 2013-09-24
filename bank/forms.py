@@ -6,13 +6,12 @@ from .models import Account
 class AccountForm(ModelForm):
     class Meta:
         model = Account
+        exclude = ('slug',)
     
-    def clean(self):
-        cleaned_data = super(AccountForm, self).clean()
-        name = cleaned_data.get("name")
-        slug = cleaned_data.get("slug")
-    
-        if not slug and name:
-            cleaned_data['slug'] = slugify(name)
-    
-        return cleaned_data
+    def save(self, commit=True):
+        instance = super(AccountForm, self).save(commit=False)
+        instance.slug = slugify(self.cleaned_data.get('name', ''))
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
