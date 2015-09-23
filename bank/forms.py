@@ -20,6 +20,7 @@ class AccountForm(ModelForm):
 class TransferFormFrom(ModelForm):
     class Meta:
         model = Transaction
+        fields= '__all__'
         widgets = {
             'from_account': HiddenInput(),
         }
@@ -27,6 +28,7 @@ class TransferFormFrom(ModelForm):
 class TransferFormTo(ModelForm):
     class Meta:
         model = Transaction
+        fields= '__all__'
         widgets = {
             'to_account': HiddenInput(),
         }
